@@ -1,0 +1,5 @@
+.env
+/docker/mysql
+/vendor
+/public/storage/images/*
+!/public/storage/images/.gitkeep
