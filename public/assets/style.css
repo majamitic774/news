@@ -1,0 +1,23 @@
+body {
+    background-color: #e6e6fa;
+}
+
+.container-short {
+    margin-top: 100px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 50px;
+    box-shadow: 0 0 10px #888888;
+    border-radius: 10px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nav-categories {
+    background-color: #efeff7;
+}
+
+.card-title a {
+    color: black;
+    text-decoration: none;
+}
