@@ -28,18 +28,14 @@ class Image
                     $fileDestination = STORAGE . "images/$NameFile";
                     move_uploaded_file($fileTmpName, $fileDestination);
                 } else {
-                    echo "your file is too big";
                     return null;
                 }
             } else {
-                echo "there was an error uploading your file";
                 return null;
             }
         } else {
-            echo "you can't upload files of this type";
             return null;
         }
-
         return ['NameFile' => $NameFile, 'file' => $file];
     }
 }
