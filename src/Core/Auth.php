@@ -20,11 +20,7 @@ class Auth
             if ($isPasswordCorrect) {
                 $_SESSION['email'] = $email;
                 header('location: ' . BASE_URL . "index.php?page=news");
-            } else {
-                echo "wrong password";
             }
-        } else {
-            echo "user does not exist";
         }
     }
 
