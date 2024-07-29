@@ -25,7 +25,7 @@
     <div class="row">
         <?php foreach ($all_news as $news) : ?>
             <div class="col-md-4">
-                <div class="card mb-3">
+                <div class="card h-100 mb-6">
                     <a href="<?= BASE_URL ?>/index.php?page=single-news&news_id=<?php echo $news['id'] ?>">
                         <img class="card-img-top" src="<?= BASE_URL ?>storage/images/<?= $news['image'] ?>" alt="Slika vesti">
                     </a>
