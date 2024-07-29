@@ -1,5 +1,5 @@
 <!-- category -->
-<nav class="navbar navbar-expand-lg navbar-light nav-categories">
+<nav class="navbar navbar-expand-lg navbar-light nav-categories mb-5">
     <div class="container-fluid">
         <ul class="navbar-nav mx-auto">
             <?php foreach ($category as $cat) : ?>
@@ -24,8 +24,8 @@
 
     <div class="row">
         <?php foreach ($all_news as $news) : ?>
-            <div class="col-md-4">
-                <div class="card h-100 mb-6">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
                     <a href="<?= BASE_URL ?>/index.php?page=single-news&news_id=<?php echo $news['id'] ?>">
                         <img class="card-img-top" src="<?= BASE_URL ?>storage/images/<?= $news['image'] ?>" alt="Slika vesti">
                     </a>
