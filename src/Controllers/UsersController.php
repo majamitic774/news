@@ -47,7 +47,11 @@ class UsersController
 
     public function logOut()
     {
+        if (isset($_SESSION['user'])) {
+            unset($_SESSION['user']);
+        }
         $this->auth->logOut();
+        header('location: ' . BASE_URL . "index.php?page=news");
     }
 
     public function logIn()
@@ -55,5 +59,7 @@ class UsersController
         $email = htmlspecialchars($_POST['email']);
         $password = htmlspecialchars($_POST['password']);
         $this->auth->logIn($email, $password);
+        $_SESSION['user'] = $email;
+        header('location: ' . BASE_URL . "index.php?page=news");
     }
 }
