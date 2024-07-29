@@ -25,13 +25,13 @@
     <div class="row">
         <?php foreach ($all_news as $news) : ?>
             <div class="col-md-4">
-                <div class="card">
+                <div class="card mb-3">
                     <a href="<?= BASE_URL ?>/index.php?page=single-news&news_id=<?php echo $news['id'] ?>">
                         <img class="card-img-top" src="<?= BASE_URL ?>storage/images/<?= $news['image'] ?>" alt="Slika vesti">
                     </a>
                     <div class="card-body">
                         <a href="<?= BASE_URL ?>/index.php?page=single-news&news_id=<?php echo $news['id'] ?>" class="link-dark text-decoration-none">
-                            <h5 class="card-title"><?= $news['title'] ?></h5>
+                            <h5 class="card-title  fst-italic"><?= $news['title'] ?></h5>
                         </a>
                         <small class="text-muted">Created: <?= $news['created_at'] ?></small>
                         <div class="d-flex">
@@ -41,13 +41,13 @@
                                     <input type="hidden" name="id" value="<?= $news['id'] ?>">
                                     <?php if (false == $auth->isAdmin()) : ?>
                                     <?php else : ?>
-                                        <button type="submit" name="delete-news" class="btn btn-danger">delete</button><br />
+                                        <button type="submit" name="delete-news" class="btn btn-outline-danger">delete</button><br />
                                     <?php endif; ?>
                                 <?php endif; ?>
                             </form>
                             <?php if ($auth != False && false == $auth->isAdmin()) : ?>
                             <?php else : ?>
-                                <a href="<?= BASE_URL ?>index.php?page=update-news&news_id=<?php echo $news['id'] ?>" class="btn btn-primary">edit</a>
+                                <a href="<?= BASE_URL ?>index.php?page=update-news&news_id=<?php echo $news['id'] ?>" class="btn btn-outline-secondary">edit</a>
                             <?php endif; ?>
                         </div>
                     </div>
