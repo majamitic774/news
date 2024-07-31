@@ -29,7 +29,9 @@ $_SESSION['token'] = $token;
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=news">News</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=insertNewsForm">Add News</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=usersRegisterForm">Register</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=usersLoginForm">Login</a></li>
+                    <?php if (!isset($_SESSION['user'])) : ?>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=usersLoginForm">Login</a></li>
+                    <?php endif; ?>
                     <?php if (isset($_SESSION['user'])) : ?>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?logOut">Logout</a></li>
                     <?php endif; ?>
