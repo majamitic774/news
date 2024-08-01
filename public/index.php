@@ -27,7 +27,9 @@ $_SESSION['token'] = $token;
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=news">News</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=insertNewsForm">Add News</a></li>
+                    <?php if (isset($_SESSION['user'])) : ?>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=insertNewsForm">Add News</a></li>
+                    <?php endif; ?>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=usersRegisterForm">Register</a></li>
                     <?php if (!isset($_SESSION['user'])) : ?>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=usersLoginForm">Login</a></li>
