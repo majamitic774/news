@@ -19,9 +19,10 @@ class Auth
             $isPasswordCorrect = password_verify($password, $user['password']);
             if ($isPasswordCorrect) {
                 $_SESSION['email'] = $email;
-                header('location: ' . BASE_URL . "index.php?page=news");
+                return true;
             }
         }
+        return false;
     }
 
     public function logOut()

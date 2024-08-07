@@ -34,10 +34,14 @@ class UsersController
                     htmlspecialchars($_POST['email']),
                     htmlspecialchars($_POST['password'])
                 );
-
-                header('location: ' . BASE_URL . "index.php?page=news");
+                $_SESSION['success_message'] = "You have successfully registered.";
+            } else {
+                $_SESSION['error_message'] = "All fields are required.";
             }
+        } else {
+            $_SESSION['error_message'] = "User already exists.";
         }
+        header('location: ' . BASE_URL . "index.php?page=usersRegisterForm");
     }
 
     public function delete()
@@ -58,8 +62,12 @@ class UsersController
     {
         $email = htmlspecialchars($_POST['email']);
         $password = htmlspecialchars($_POST['password']);
-        $this->auth->logIn($email, $password);
-        $_SESSION['user'] = $email;
-        header('location: ' . BASE_URL . "index.php?page=news");
+        if ($this->auth->logIn($email, $password)) {
+            $_SESSION['success_message'] = "You have successfully logged in.";
+        } else {
+            $_SESSION['error_message'] = "Wrong username or password!";
+        }
+        header('location: ' . BASE_URL . "index.php?page=usersLoginForm");
+        exit();
     }
 }

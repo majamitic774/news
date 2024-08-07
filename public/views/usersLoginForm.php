@@ -4,6 +4,21 @@
             <?php if (isset($_SESSION['token'])) : ?>
                 <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?>">
             <?php endif; ?>
+
+            <?php if (isset($_SESSION['success_message'])) : ?>
+                <div class="alert alert-success" role="alert">
+                    <?= $_SESSION['success_message'] ?>
+                </div>
+                <?php unset($_SESSION['success_message']); ?>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['error_message'])) : ?>
+                <div class="alert alert-danger" role="alert">
+                    <?= $_SESSION['error_message'] ?>
+                </div>
+                <?php unset($_SESSION['error_message']); ?>
+            <?php endif; ?>
+
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" name="email" id="email">

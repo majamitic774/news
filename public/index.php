@@ -6,6 +6,10 @@ require_once '../src/utils/constants.php';
 ob_start();
 $token = md5(uniqid(rand(), true));
 $_SESSION['token'] = $token;
+
+use News\Core\Auth;
+
+$auth = new Auth();
 ?>
 <!doctype html>
 <html lang="en">
@@ -27,14 +31,16 @@ $_SESSION['token'] = $token;
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=news">News</a></li>
-                    <?php if (isset($_SESSION['user'])) : ?>
+                    <?php if ($auth->getLoggedInUser()) : ?>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=insertNewsForm">Add News</a></li>
                     <?php endif; ?>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=usersRegisterForm">Register</a></li>
-                    <?php if (!isset($_SESSION['user'])) : ?>
+                    <?php if (!isset($_SESSION['email'])) : ?>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=usersRegisterForm">Register</a></li>
+                    <?php endif; ?>
+                    <?php if (!$auth->getLoggedInUser()) : ?>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=usersLoginForm">Login</a></li>
                     <?php endif; ?>
-                    <?php if (isset($_SESSION['user'])) : ?>
+                    <?php if (isset($_SESSION['email'])) : ?>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?logOut">Logout</a></li>
                     <?php endif; ?>
                 </ul>
@@ -53,13 +59,11 @@ use News\Models\User;
 
 use News\Controllers\NewsController;
 use News\Controllers\UsersController;
-use News\Core\Auth;
 use News\Models\Comment;
 
 $news = new News();
 $user = new User();
 $comment = new Comment();
-$auth = new Auth();
 
 $newsController = new NewsController($news);
 $usersController = new UsersController($user, $auth);
