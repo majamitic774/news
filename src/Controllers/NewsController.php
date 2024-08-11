@@ -52,6 +52,7 @@ class NewsController
         $category_id = $_POST['category_id'] ?? '';
 
         if (empty($title) || empty($body) || empty($category_id) || strlen($title) > 255) {
+            $_SESSION['error_message'] = "All fields are required.";
             header('location: ' . BASE_URL . 'index.php?page=insertNewsForm');
             exit;
         }
@@ -61,6 +62,11 @@ class NewsController
         $category_id = htmlspecialchars($category_id);
 
         $this->newsModel->insert($title, $body, $category_id, $imageName);
+
+
+        $_SESSION['success_message'] = "You have successfully created the news.";
+        header('location: ' . BASE_URL . 'index.php?page=insertNewsForm');
+        exit;
     }
 
     public function showSingleNews()
