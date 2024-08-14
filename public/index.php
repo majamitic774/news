@@ -31,7 +31,7 @@ $auth = new Auth();
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=news">News</a></li>
-                    <?php if ($auth->getLoggedInUser()) : ?>
+                    <?php if (Auth::isAdmin()) : ?>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=insertNewsForm">Add News</a></li>
                     <?php endif; ?>
                     <?php if (!isset($_SESSION['email'])) : ?>

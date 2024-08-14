@@ -1,4 +1,18 @@
 <div class="container-short">
+    <?php if (isset($_SESSION['success_message'])): ?>
+        <div class="alert alert-success" role="alert">
+            <?= $_SESSION['success_message']; ?>
+            <?php unset($_SESSION['success_message']); ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['error_message'])): ?>
+        <div class="alert alert-danger" role="alert">
+            <?= $_SESSION['error_message']; ?>
+            <?php unset($_SESSION['error_message']); ?>
+        </div>
+    <?php endif; ?>
+
     <form action="<?= BASE_URL . 'index.php' ?>" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?>">
         <input type="hidden" name="id" value="<?php echo $_GET['news_id'] ?>"> <br />

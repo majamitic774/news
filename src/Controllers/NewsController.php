@@ -63,7 +63,6 @@ class NewsController
 
         $this->newsModel->insert($title, $body, $category_id, $imageName);
 
-
         $_SESSION['success_message'] = "You have successfully created the news.";
         header('location: ' . BASE_URL . 'index.php?page=insertNewsForm');
         exit;
@@ -119,11 +118,12 @@ class NewsController
         $body = $_POST['body'] ?? '';
 
         if (empty($title) || empty($body) || empty($id)) {
-            header('location: ' . BASE_URL . "index.php?page=update-news&news_id=$id");
-            exit;
+            $_SESSION['error_message'] = "All fields are required.";
+        } else {
+            $this->newsModel->update($id, $title, $body, $imageName);
+            $_SESSION['success_message'] = "You have successfully updated the news.";
         }
-
-        $this->newsModel->update($id, $title, $body, $imageName);
+        header('location: ' . BASE_URL . "index.php?page=update-news&news_id=$id");
     }
 
     public function showUpdateForm()
