@@ -11,7 +11,7 @@ use News\Core\Auth;
                     <div class="card">
                         <div class="card-body">
                             <h2 class="mt-3"><?= $title . "<br>"; ?></h2>
-                            <p class="text-muted">Published on <?= $created_at ?></p>
+                            <p class="text-muted">Published on <?= date('Y-m-d', strtotime($created_at)) ?></p>
                             <p><?= $body ?></p>
                         </div>
                     </div>
