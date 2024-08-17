@@ -33,7 +33,7 @@
                         <a href="<?= BASE_URL ?>/index.php?page=single-news&news_id=<?php echo $news['id'] ?>" class="link-dark text-decoration-none">
                             <h5 class="card-title  fst-italic"><?= $news['title'] ?></h5>
                         </a>
-                        <small class="text-muted">Created: <?= date('Y-m-d', strtotime($news['created_at'])) ?></small>
+                        <small class="text-muted"><?= date('Y-m-d', strtotime($news['created_at'])) ?></small>
                         <div class="d-flex">
                             <form action="<?= BASE_URL . 'index.php' ?>" method="POST">
                                 <?php if (isset($_SESSION['token'])) : ?>
