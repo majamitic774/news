@@ -32,8 +32,8 @@
             <input type="text" class="form-control" name="title" id="exampleFormControlInput1">
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Body</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" name="body" rows="3"></textarea>
+            <label for="editor" class="form-label">Body</label>
+            <textarea class="form-control" id="editor" name="body" rows="3"></textarea>
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
@@ -42,3 +42,27 @@
         <button type="submit" name="insert-news" class="btn btn-primary">Submit</button>
     </form>
 </div>
+
+<script type="module">
+    import {
+        ClassicEditor,
+        Essentials,
+        Bold,
+        Italic,
+        Font,
+        Paragraph
+    } from 'ckeditor5';
+
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+            plugins: [Essentials, Bold, Italic, Font, Paragraph],
+            toolbar: {
+                items: [
+                    'undo', 'redo', '|', 'bold', 'italic', '|',
+                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+                ]
+            }
+        })
+        .then( /* ... */ )
+        .catch( /* ... */ );
+</script>

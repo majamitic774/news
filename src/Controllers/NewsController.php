@@ -57,10 +57,6 @@ class NewsController
             exit;
         }
 
-        $title = htmlspecialchars($title);
-        $body = htmlspecialchars($body);
-        $category_id = htmlspecialchars($category_id);
-
         $this->newsModel->insert($title, $body, $category_id, $imageName);
 
         $_SESSION['success_message'] = "You have successfully created the news.";
