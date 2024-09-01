@@ -32,8 +32,8 @@
             <input type="text" class="form-control" name="title" id="exampleFormControlInput1">
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Body</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" name="body" rows="3"></textarea>
+            <label for="editor" class="form-label">Body</label>
+            <textarea class="form-control" id="editor" name="body" rows="3"></textarea>
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
@@ -42,3 +42,56 @@
         <button type="submit" name="insert-news" class="btn btn-primary">Submit</button>
     </form>
 </div>
+
+<script type="module">
+    import {
+        ClassicEditor,
+        Heading,
+        Link,
+        List,
+        Essentials,
+        Bold,
+        Italic,
+        Font,
+        Paragraph,
+        Image,
+        ImageToolbar,
+        ImageCaption,
+        ImageUpload,
+        SimpleUploadAdapter
+    } from 'ckeditor5';
+
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+            plugins: [Essentials, Bold, Link, Italic, Font, List, Paragraph, Heading,
+                Image, ImageToolbar, ImageCaption, ImageUpload, SimpleUploadAdapter
+            ],
+            toolbar: {
+                items: [
+                    'undo', 'redo', '|', 'bold', 'italic', '|',
+                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'heading', 'link', 'numberedList', 'bulletedList', '|',
+                    'insertImage'
+                ]
+            },
+            simpleUpload: {
+                // The URL that the images are uploaded to.
+                uploadUrl: '<?= BASE_URL ?>index.php?page=uploadCKEditorImage',
+
+                // Optional additional headers.
+                headers: {
+                    'X-CSRF-TOKEN': '<?php echo $_SESSION['token']; ?>',
+                }
+            },
+            image: {
+                toolbar: [
+                    'imageTextAlternative', 'toggleImageCaption', 'imageStyle:inline',
+                ]
+            }
+        })
+        .then(editor => {
+            window.editor = editor;
+        })
+        .catch(error => {
+            console.error('There was a problem initializing the editor.', error);
+        });
+</script>

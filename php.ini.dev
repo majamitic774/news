@@ -1,3 +1,11 @@
 error_reporting = E_ALL
 display_errors = On
 display_startup_errors = On
+
+[xdebug]
+xdebug.mode=debug
+xdebug.start_with_request=yes
+xdebug.client_host=host.docker.internal  # Allows Xdebug to connect to your host machine
+xdebug.client_port=9003  # Internal port inside the Docker container
+xdebug.idekey=VSCODE  # Optional, helps with identifying the IDE session
+xdebug.log=/tmp/xdebug.log  # Path for logging Xdebug information

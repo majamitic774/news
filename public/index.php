@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require_once '../src/utils/constants.php';
 
 ob_start();
@@ -8,8 +7,30 @@ $token = md5(uniqid(rand(), true));
 $_SESSION['token'] = $token;
 
 use News\Core\Auth;
+use News\Controllers\CommentController;
+use News\Models\News;
+use News\Models\User;
+
+use News\Controllers\NewsController;
+use News\Controllers\UsersController;
+use News\Models\Comment;
 
 $auth = new Auth();
+
+
+$news = new News();
+$user = new User();
+$comment = new Comment();
+
+$newsController = new NewsController($news);
+$usersController = new UsersController($user, $auth);
+$commentController = new CommentController($comment);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['page']) && $_GET['page'] == 'uploadCKEditorImage') {
+    $newsController->uploadCKEditorImage();
+    exit;
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -18,6 +39,7 @@ $auth = new Auth();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -48,26 +70,20 @@ $auth = new Auth();
         </div>
     </nav>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script type="importmap">
+        {
+        "imports": {
+            "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.js",
+            "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/43.0.0/"
+        }
+    }
+</script>
+
 </body>
 
 </html>
 <?php
 
-use News\Controllers\CommentController;
-use News\Models\News;
-use News\Models\User;
-
-use News\Controllers\NewsController;
-use News\Controllers\UsersController;
-use News\Models\Comment;
-
-$news = new News();
-$user = new User();
-$comment = new Comment();
-
-$newsController = new NewsController($news);
-$usersController = new UsersController($user, $auth);
-$commentController = new CommentController($comment);
 
 if (isset($_GET['page'])) {
     if ($_GET['page'] == 'news') {

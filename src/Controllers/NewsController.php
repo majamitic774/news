@@ -42,6 +42,11 @@ class NewsController
     }
 
 
+    public function uploadCKEditorImage()
+    {
+        Image::uploadCKEditorImage();
+    }
+
     public function insert()
     {
         $fileInfo = Image::uploadImage();
@@ -56,10 +61,6 @@ class NewsController
             header('location: ' . BASE_URL . 'index.php?page=insertNewsForm');
             exit;
         }
-
-        $title = htmlspecialchars($title);
-        $body = htmlspecialchars($body);
-        $category_id = htmlspecialchars($category_id);
 
         $this->newsModel->insert($title, $body, $category_id, $imageName);
 
