@@ -57,13 +57,14 @@
         Image,
         ImageToolbar,
         ImageCaption,
-        ImageUpload
+        ImageUpload,
+        SimpleUploadAdapter
     } from 'ckeditor5';
 
     ClassicEditor
         .create(document.querySelector('#editor'), {
             plugins: [Essentials, Bold, Link, Italic, Font, List, Paragraph, Heading,
-                Image, ImageToolbar, ImageCaption, ImageUpload
+                Image, ImageToolbar, ImageCaption, ImageUpload, SimpleUploadAdapter
             ],
             toolbar: {
                 items: [
@@ -72,13 +73,25 @@
                     'insertImage'
                 ]
             },
+            simpleUpload: {
+                // The URL that the images are uploaded to.
+                uploadUrl: '<?= BASE_URL ?>index.php?page=uploadCKEditorImage',
+
+                // Optional additional headers.
+                headers: {
+                    'X-CSRF-TOKEN': '<?php echo $_SESSION['token']; ?>',
+                }
+            },
             image: {
                 toolbar: [
                     'imageTextAlternative', 'toggleImageCaption', 'imageStyle:inline',
-                    'imageStyle:block', 'imageStyle:side'
                 ]
             }
         })
-        .then( /* ... */ )
-        .catch( /* ... */ );
+        .then(editor => {
+            window.editor = editor;
+        })
+        .catch(error => {
+            console.error('There was a problem initializing the editor.', error);
+        });
 </script>

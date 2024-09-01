@@ -38,36 +38,31 @@ class Image
         }
         return ['NameFile' => $NameFile, 'file' => $file];
     }
+
     public static function uploadCKEditorImage()
     {
-        // Make sure the request method is POST
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             http_response_code(405);
             echo json_encode(['error' => 'Method not allowed']);
             exit;
         }
 
-        // Check if a file was uploaded
         if (isset($_FILES['upload']) && $_FILES['upload']['error'] === UPLOAD_ERR_OK) {
             $file = $_FILES['upload'];
             $fileName = $file['name'];
             $fileTmpName = $file['tmp_name'];
             $fileSize = $file['size'];
-            $fileError = $file['error'];
 
-            $fileExt = explode('.', $fileName);
-            $fileActualExt = strtolower(end($fileExt));
-
+            $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
             $allowed = ['jpg', 'jpeg', 'png'];
 
-            if (in_array($fileActualExt, $allowed)) {
-                if ($fileSize < 5000000) {  // Limit the file size to 5MB
-                    $NameFile = uniqid() . "." . $fileActualExt;
-                    $fileDestination = STORAGE . "images/$NameFile";
+            if (in_array($fileExt, $allowed)) {
+                if ($fileSize < 5000000) {
+                    $uniqueFileName = uniqid() . '.' . $fileExt;
+                    $fileDestination = STORAGE . "images/$uniqueFileName";
 
                     if (move_uploaded_file($fileTmpName, $fileDestination)) {
-                        // Return the URL for CKEditor
-                        $url = BASE_URL . "images/$NameFile";
+                        $url = BASE_URL . "storage/images/$uniqueFileName";
                         echo json_encode(['url' => $url]);
                         exit;
                     }

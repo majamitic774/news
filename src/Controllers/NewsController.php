@@ -42,14 +42,15 @@ class NewsController
     }
 
 
+    public function uploadCKEditorImage()
+    {
+        Image::uploadCKEditorImage();
+    }
+
     public function insert()
     {
         $fileInfo = Image::uploadImage();
-        $ckEditorImage = Image::uploadCKEditorImage();
         $imageName = $fileInfo ? $fileInfo['NameFile'] : '';
-
-        var_dump($_FILES);
-        die;
 
         $title = $_POST['title'] ?? '';
         $body = $_POST['body'] ?? '';

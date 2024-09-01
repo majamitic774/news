@@ -7,8 +7,30 @@ $token = md5(uniqid(rand(), true));
 $_SESSION['token'] = $token;
 
 use News\Core\Auth;
+use News\Controllers\CommentController;
+use News\Models\News;
+use News\Models\User;
+
+use News\Controllers\NewsController;
+use News\Controllers\UsersController;
+use News\Models\Comment;
 
 $auth = new Auth();
+
+
+$news = new News();
+$user = new User();
+$comment = new Comment();
+
+$newsController = new NewsController($news);
+$usersController = new UsersController($user, $auth);
+$commentController = new CommentController($comment);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['page']) && $_GET['page'] == 'uploadCKEditorImage') {
+    $newsController->uploadCKEditorImage();
+    exit;
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -62,21 +84,6 @@ $auth = new Auth();
 </html>
 <?php
 
-use News\Controllers\CommentController;
-use News\Models\News;
-use News\Models\User;
-
-use News\Controllers\NewsController;
-use News\Controllers\UsersController;
-use News\Models\Comment;
-
-$news = new News();
-$user = new User();
-$comment = new Comment();
-
-$newsController = new NewsController($news);
-$usersController = new UsersController($user, $auth);
-$commentController = new CommentController($comment);
 
 if (isset($_GET['page'])) {
     if ($_GET['page'] == 'news') {
@@ -97,7 +104,6 @@ if (isset($_GET['page'])) {
 } else {
     header('location: ' . BASE_URL . "index.php?page=news");
 }
-
 
 if (isset($_POST['insert-news']) && Auth::isAdmin()) {
     $newsController->insert();
