@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require_once '../src/utils/constants.php';
 
 ob_start();
@@ -98,6 +97,7 @@ if (isset($_GET['page'])) {
 } else {
     header('location: ' . BASE_URL . "index.php?page=news");
 }
+
 
 if (isset($_POST['insert-news']) && Auth::isAdmin()) {
     $newsController->insert();

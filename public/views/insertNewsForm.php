@@ -46,20 +46,36 @@
 <script type="module">
     import {
         ClassicEditor,
+        Heading,
+        Link,
+        List,
         Essentials,
         Bold,
         Italic,
         Font,
-        Paragraph
+        Paragraph,
+        Image,
+        ImageToolbar,
+        ImageCaption,
+        ImageUpload
     } from 'ckeditor5';
 
     ClassicEditor
         .create(document.querySelector('#editor'), {
-            plugins: [Essentials, Bold, Italic, Font, Paragraph],
+            plugins: [Essentials, Bold, Link, Italic, Font, List, Paragraph, Heading,
+                Image, ImageToolbar, ImageCaption, ImageUpload
+            ],
             toolbar: {
                 items: [
                     'undo', 'redo', '|', 'bold', 'italic', '|',
-                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'heading', 'link', 'numberedList', 'bulletedList', '|',
+                    'insertImage'
+                ]
+            },
+            image: {
+                toolbar: [
+                    'imageTextAlternative', 'toggleImageCaption', 'imageStyle:inline',
+                    'imageStyle:block', 'imageStyle:side'
                 ]
             }
         })

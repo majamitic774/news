@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.8"
 services:
   app:
     build:
@@ -12,9 +12,11 @@ services:
     working_dir: /var/www/
     volumes:
       - ./:/var/www
+    ports:
+      - "9005:9003"  # Expose Xdebug port
     networks:
       news:
-        ipv4_address: 192.168.0.2
+        ipv4_address: 10.10.0.2
 
   db:
     image: mysql:8.0
@@ -31,7 +33,7 @@ services:
       - db_data:/var/lib/mysql
     networks:
       news:
-        ipv4_address: 192.168.0.3
+        ipv4_address: 10.10.0.3
 
   nginx:
     image: nginx:alpine
@@ -44,14 +46,14 @@ services:
       - ./docker/nginx:/etc/nginx/conf.d/
     networks:
       news:
-        ipv4_address: 192.168.0.4
+        ipv4_address: 10.10.0.4
 
 networks:
   news:
     driver: bridge
     ipam:
       config:
-        - subnet: 192.168.0.0/24
+        - subnet: 10.10.0.0/16
 
 volumes:
   db_data:
