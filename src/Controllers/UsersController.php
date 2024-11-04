@@ -55,7 +55,7 @@ class UsersController
             unset($_SESSION['user']);
         }
         $this->auth->logOut();
-        header('location: ' . BASE_URL . "index.php?page=news");
+        header('location: ' . BASE_URL . "index.php?page=usersLoginForm");
     }
 
     public function logIn()
@@ -64,10 +64,11 @@ class UsersController
         $password = htmlspecialchars($_POST['password']);
         if ($this->auth->logIn($email, $password)) {
             $_SESSION['success_message'] = "You have successfully logged in.";
+            header('Location: ' . BASE_URL . 'index.php?page=news');
         } else {
             $_SESSION['error_message'] = "Wrong username or password!";
+            header('location: ' . BASE_URL . "index.php?page=usersLoginForm");
         }
-        header('location: ' . BASE_URL . "index.php?page=usersLoginForm");
         exit();
     }
 }
