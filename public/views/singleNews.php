@@ -6,7 +6,7 @@ use News\Core\Auth;
 <body>
     <div class="container">
         <div class="row mb-5">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="news my-5">
                     <div class="card">
                         <div class="card-body">
@@ -21,7 +21,7 @@ use News\Core\Auth;
 
             <!-- START COMMENTS -->
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="comments my-4">
                         <div class="card">
                             <div class="card-body">
