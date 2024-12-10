@@ -13,6 +13,7 @@
         </div>
     <?php endif; ?>
 
+
     <form action="<?= BASE_URL . 'index.php' ?>" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?>">
         <input type="hidden" name="id" value="<?php echo $_GET['news_id'] ?>"> <br />
@@ -22,7 +23,8 @@
         </div>
         <div class="mb-3">
             <label for="body" class="form-label">Body</label>
-            <input type="text" class="form-control" name="body" value="<?= $news['body'] ?>">
+            <!-- Replace input with textarea for CKEditor -->
+            <textarea class="form-control" id="editor" name="body" rows="3"><?= $news['body'] ?></textarea>
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
@@ -31,3 +33,56 @@
         <button type="submit" name="updateNews" class="btn btn-primary">Edit</button>
     </form>
 </div>
+
+<script type="module">
+    import {
+        ClassicEditor,
+        Heading,
+        Link,
+        List,
+        Essentials,
+        Bold,
+        Italic,
+        Font,
+        Paragraph,
+        Image,
+        ImageToolbar,
+        ImageCaption,
+        ImageUpload,
+        SimpleUploadAdapter
+    } from 'ckeditor5';
+
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+            plugins: [Essentials, Bold, Link, Italic, Font, List, Paragraph, Heading,
+                Image, ImageToolbar, ImageCaption, ImageUpload, SimpleUploadAdapter
+            ],
+            toolbar: {
+                items: [
+                    'undo', 'redo', '|', 'bold', 'italic', '|',
+                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'heading', 'link', 'numberedList', 'bulletedList', '|',
+                    'insertImage'
+                ]
+            },
+            simpleUpload: {
+                // The URL that the images are uploaded to.
+                uploadUrl: '<?= BASE_URL ?>index.php?page=uploadCKEditorImage',
+
+                // Optional additional headers.
+                headers: {
+                    'X-CSRF-TOKEN': '<?php echo $_SESSION['token']; ?>',
+                }
+            },
+            image: {
+                toolbar: [
+                    'imageTextAlternative', 'toggleImageCaption', 'imageStyle:inline',
+                ]
+            }
+        })
+        .then(editor => {
+            window.editor = editor;
+        })
+        .catch(error => {
+            console.error('There was a problem initializing the editor.', error);
+        });
+</script>

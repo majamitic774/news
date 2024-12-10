@@ -51,10 +51,8 @@ class UsersController
 
     public function logOut()
     {
-        if (isset($_SESSION['user'])) {
-            unset($_SESSION['user']);
-        }
         $this->auth->logOut();
+        $_SESSION['success_message'] = "You have successfully logged out.";
         header('location: ' . BASE_URL . "index.php?page=usersLoginForm");
     }
 

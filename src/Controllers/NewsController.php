@@ -124,7 +124,8 @@ class NewsController
             $this->newsModel->update($id, $title, $body, $imageName);
             $_SESSION['success_message'] = "You have successfully updated the news.";
         }
-        header('location: ' . BASE_URL . "index.php?page=update-news&news_id=$id");
+        // header('location: ' . BASE_URL . "index.php?page=update-news&news_id=$id");
+        header('location: ' . BASE_URL . 'index.php?page=news');
     }
 
     public function showUpdateForm()
