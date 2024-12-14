@@ -8,14 +8,10 @@ use News\Core\Auth;
         <div class="row mb-5">
             <div class="col-md-12">
                 <div class="news my-5">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="mt-3"><?= $title . "<br>"; ?></h2>
-                            <p class="text-muted"><?= date('Y-m-d', strtotime($created_at)) ?></p>
-                            <!-- The body that includes text and images -->
-                            <div class="body"><?= $body ?></div>
-                        </div>
-                    </div>
+                    <h2 class="mt-3"><?= $title . "<br>"; ?></h2>
+                    <p class="text-muted"><?= date('Y-m-d', strtotime($created_at)) ?></p>
+                    <!-- The body that includes text and images -->
+                    <div class="body"><?= $body ?></div>
                 </div>
             </div>
 

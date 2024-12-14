@@ -45,25 +45,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['page']) && $_GET['page
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg bg-dark">
+        <div class="container">
+            <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=news">News</a></li>
+                    <li class="nav-item"><a class="nav-link active text-light" aria-current="page" href="<?= BASE_URL ?>index.php?page=news">News</a></li>
                     <?php if (Auth::isAdmin()) : ?>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=insertNewsForm">Add News</a></li>
+                        <li class="nav-item"><a class="nav-link active text-light" aria-current="page" href="<?= BASE_URL ?>index.php?page=insertNewsForm">Add News</a></li>
                     <?php endif; ?>
                     <?php if (!isset($_SESSION['email'])) : ?>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=usersRegisterForm">Register</a></li>
+                        <li class="nav-item"><a class="nav-link active text-light" aria-current="page" href="<?= BASE_URL ?>index.php?page=usersRegisterForm">Register</a></li>
                     <?php endif; ?>
                     <?php if (!$auth->getLoggedInUser()) : ?>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?page=usersLoginForm">Login</a></li>
+                        <li class="nav-item"><a class="nav-link active text-light" aria-current="page" href="<?= BASE_URL ?>index.php?page=usersLoginForm">Login</a></li>
                     <?php endif; ?>
                     <?php if (isset($_SESSION['email'])) : ?>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= BASE_URL ?>index.php?logOut">Logout</a></li>
+                        <li class="nav-item"><a class="nav-link active text-light" aria-current="page" href="<?= BASE_URL ?>index.php?logOut">Logout</a></li>
                     <?php endif; ?>
                 </ul>
             </div>
