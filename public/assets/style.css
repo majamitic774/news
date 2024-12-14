@@ -17,11 +17,15 @@ body {
     /* Sprečava slike ili elemente da izlaze van */
 }
 
-.body img {
-    max-width: 100%;
-    height: auto;
+.body figure img {
+    height: 400px;
+    max-width: 700px;
+    object-fit: cover;
+}
+
+.card a img {
     display: block;
-    /* Obezbeđuje da slike zauzimaju blok i ostaju unutar elementa */
+    height: 300px;
     object-fit: cover;
 }
 

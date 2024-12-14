@@ -65,7 +65,7 @@ class NewsController
         $this->newsModel->insert($title, $body, $category_id, $imageName);
 
         $_SESSION['success_message'] = "You have successfully created the news.";
-        header('location: ' . BASE_URL . 'index.php?page=insertNewsForm');
+        header('location: ' . BASE_URL . 'index.php');
         exit;
     }
 
